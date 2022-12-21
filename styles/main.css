@@ -1,12 +1,11 @@
 .sidebar {
-  height: 100vh;
   grid-area: sidebar;
   border: 1px solid black
 }
 
 .content {
-  height: 100vh;
   grid-area: content;
+  height: 100vh;
 }
 
 .header {
@@ -24,6 +23,19 @@
     "sidebar content";
   background-color: #fff;
   color: #444;
+}
+
+.tag_group {
+  display: flex;
+  flex-wrap: wrap;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid black;
+}
+
+.tag {
+  margin-right: 5px;
+  margin-bottom: 3px;
 }
 
 .tags {
@@ -45,9 +57,12 @@
 }
 
 .tags_all {
+  display: flex;
+  flex-wrap: wrap;
   grid-row: 3 / 4;
   border-bottom: 1px solid black;
   padding: 3%;
+  border: 1px solid red;
 }
 
 .box {
@@ -70,9 +85,26 @@
   display: none;
 }
 
-.tree {
+.treeX {
   height: 90vh;
   overflow-y: scroll;
   max-width: 100%;
   overflow-x: hidden;
+}
+
+
+.tree {
+  --spacing: 1.5rem;
+  --radius: 10px;
+}
+
+.tree li {
+  display: block;
+  position: relative;
+  padding-left: calc(2 * var(--spacing) - var(--radius) - 2px);
+}
+
+.tree ul {
+  margin-left: calc(var(--radius) - var(--spacing));
+  padding-left: 0;
 }

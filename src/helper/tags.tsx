@@ -1,8 +1,8 @@
 import TagType from '../types/TagType'
 
 
-export const TagsCustomer = (tags: TagType[]): TagType[] => {
-  let customer: TagType | undefined = tags.find(tag => tag.name == 'customer')
+function findChildTags(tags: TagType[], parentTagName: string): TagType[] {
+  let customer: TagType | undefined = tags.find(tag => tag.name == parentTagName)
   let result: TagType[] = []
   if (customer != undefined) {
     result = tags.filter(tag => {
@@ -12,6 +12,5 @@ export const TagsCustomer = (tags: TagType[]): TagType[] => {
   return result
 }
 
-const T1 = () => { }
-
-export default T1;
+export const TagsCustomer = (tags: TagType[]): TagType[] => { return findChildTags(tags, 'customer') }
+export const TagsMain = (tags: TagType[]): TagType[] => { return findChildTags(tags, 'main') }
