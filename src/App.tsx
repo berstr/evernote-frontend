@@ -47,6 +47,14 @@ const notesTest = [
   createNotesTest(':task 001', 'vw', '7574545757', ['task'], '2022-12-01', '2022-11-11'),
   createNotesTest('=this is a workstream', 'vw', '001', ['workstream'], '2022-11-01', '2022-11-11'),
   createNotesTest('=this is a workstream1', 'vw', '002', ['workstream'], '2022-11-01', '2022-11-11'),
+  createNotesTest('=this is a workstream2', 'Bosch', '003', ['workstream'], '2022-11-02', '2022-11-11'),
+  createNotesTest('=this is a workstream3', 'bsh', '006', ['workstream'], '2022-11-05', '2022-11-11'),
+  createNotesTest('=this is a workstream4', 'vw', '004', ['workstream'], '2022-11-03', '2022-11-11'),
+  createNotesTest('=this is a workstream5', 'vw', '009', ['workstream'], '2022-11-04', '2022-11-11'),
+  createNotesTest('2022-12-12 - notes 123', 'porsche', '008', ['note'], '2022-11-01', '2022-11-11'),
+  createNotesTest(':task 001', 'vw', '7574545757', ['task'], '2022-12-01', '2022-11-11'),
+  createNotesTest('=this is a workstream', 'vw', '001', ['workstream'], '2022-11-01', '2022-11-11'),
+  createNotesTest('=this is a workstream1', 'audi', '002', ['workstream'], '2022-11-01', '2022-11-11'),
   createNotesTest('=this is a workstream2', 'vw', '003', ['workstream'], '2022-11-02', '2022-11-11'),
   createNotesTest('=this is a workstream3', 'vw', '006', ['workstream'], '2022-11-05', '2022-11-11'),
   createNotesTest('=this is a workstream4', 'vw', '004', ['workstream'], '2022-11-03', '2022-11-11'),
@@ -61,17 +69,9 @@ const notesTest = [
   createNotesTest('=this is a workstream5', 'vw', '009', ['workstream'], '2022-11-04', '2022-11-11'),
   createNotesTest('2022-12-12 - notes 123', 'porsche', '008', ['note'], '2022-11-01', '2022-11-11'),
   createNotesTest(':task 001', 'vw', '7574545757', ['task'], '2022-12-01', '2022-11-11'),
-  createNotesTest('=this is a workstream', 'vw', '001', ['workstream'], '2022-11-01', '2022-11-11'),
-  createNotesTest('=this is a workstream1', 'vw', '002', ['workstream'], '2022-11-01', '2022-11-11'),
-  createNotesTest('=this is a workstream2', 'vw', '003', ['workstream'], '2022-11-02', '2022-11-11'),
-  createNotesTest('=this is a workstream3', 'vw', '006', ['workstream'], '2022-11-05', '2022-11-11'),
-  createNotesTest('=this is a workstream4', 'vw', '004', ['workstream'], '2022-11-03', '2022-11-11'),
-  createNotesTest('=this is a workstream5', 'vw', '009', ['workstream'], '2022-11-04', '2022-11-11'),
-  createNotesTest('2022-12-12 - notes 123', 'porsche', '008', ['note'], '2022-11-01', '2022-11-11'),
-  createNotesTest(':task 001', 'vw', '7574545757', ['task'], '2022-12-01', '2022-11-11'),
   createNotesTest(':task 001', 'vw', '7574545757', ['task'], '2022-12-01', '2022-11-11'),
   createNotesTest('=this is a workstream', 'vw', '001', ['workstream'], '2022-11-01', '2022-11-11'),
-  createNotesTest('=this is a workstream1', 'vw', '002', ['workstream'], '2022-11-01', '2022-11-11'),
+  createNotesTest('=this is a workstream1', 'porsche', '002', ['workstream'], '2022-11-01', '2022-11-11'),
   createNotesTest('=this is a workstream2', 'vw', '003', ['workstream'], '2022-11-02', '2022-11-11'),
   createNotesTest('=this is a workstream3', 'vw', '006', ['workstream'], '2022-11-05', '2022-11-11'),
   createNotesTest('=this is a workstream4', 'vw', '004', ['workstream'], '2022-11-03', '2022-11-11'),
@@ -230,7 +230,7 @@ function App() {
               Search A
             </Grid>
           </Grid>
-          <div style={{ width: '100%' }}><NotesTable notes={notesTest} orderBy={'title'} /></div>
+          <div style={{ width: '100%' }}><NotesTable notes={notesTest} customerTags={customerTags} /></div>
         </Grid>
       </Grid>
     </AppContext.Provider >

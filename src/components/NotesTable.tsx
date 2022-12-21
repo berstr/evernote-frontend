@@ -9,6 +9,8 @@ import TableSortLabel from '@mui/material/TableSortLabel';
 import Paper from '@mui/material/Paper';
 
 import NoteType from '../types/NoteTyoe'
+import TagType from '../types/TagType';
+import { filterNotes } from '../helper/tags'
 
 type Order = 'asc' | 'desc';
 
@@ -54,13 +56,24 @@ const rowSx: SxProps = {
 
 
 interface NotesTableProps {
-  notes: Array<NoteType>;
-  orderBy: keyof NoteType;
+  customerTags: TagType[];
+  mainTags: TagType[];
+  otherTags: TagType[];
+  notes: NoteType[];
 }
 
-export default function NotesTable({ notes, orderBy }: NotesTableProps) {
+
+export default function NotesTable(props: NotesTableProps) {
   const [order, setOrder] = React.useState<Order>('asc');
-  const [order_By, setOrderBy] = React.useState<keyof NoteType>(orderBy);
+  const [order_By, setOrderBy] = React.useState<keyof NoteType>('customer');
+  const [notes, setNotes] = React.useState<NoteType[]>([])
+
+
+  React.useEffect(() => {
+    const notes_state: NoteType[] = filterNotes(props.notes, props.customerTags)
+    setNotes(notes_state)
+  }, []);
+
 
   const handleRequestSort = (
     event: React.MouseEvent<unknown>,
@@ -90,7 +103,7 @@ export default function NotesTable({ notes, orderBy }: NotesTableProps) {
             {/* console.log('NotesTable1 - notes:', notes)*/}
             {/* console.log(notes[0])*/}
             {/* console.log(Object.keys(notes[0])) */}
-            {Object.keys(notes[0]).map((note_key: keyof NoteType, index: number) => (
+            {notes.length > 0 && Object.keys(notes[0]).map((note_key: keyof NoteType, index: number) => (
               <TableCell
                 key={index}
                 padding={'normal'}
