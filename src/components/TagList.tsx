@@ -8,19 +8,19 @@ interface TagListProps {
   tags: TagType[];
   display: string;
   sort: boolean;
-  category: string;
 }
 
 
-export default function TagList({ tags, category }: TagListProps): JSX.Element {
+export default function TagList({ tags }: TagListProps): JSX.Element {
 
   return (
     <div className='tag_group'>
+      {console.log('TagList: ', tags)}
       {
         tags.map((tag: TagType) => {
           return (
             <div key={tag.guid} >
-              <Tag tag={tag} category={category} />
+              <Tag tag={tag} />
             </div>
           )
         })

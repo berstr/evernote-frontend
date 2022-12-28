@@ -1,5 +1,6 @@
 import TagType from '../types/TagType'
 import NoteType from '../types/NoteType'
+import NotebookType from '../types/NotebookType'
 import { TagFaces } from '@mui/icons-material';
 
 
@@ -13,6 +14,25 @@ export function findChildTags(tags: TagType[], parentTagName: string): TagType[]
   }
   return result
 }
+
+// the initially selected notebooks are defined by comparing the tag name with the title of the notebook
+// 
+export function initalNotebooks(notebooks: Array<NotebookType>, tags: TagType[]): NotebookType[] {
+  let result: NotebookType[] = [];
+  for (const tag of getSelectedTags(tags)) {
+    for (const notebook of notebooks) {
+      const tag_lowerCase = tag.name.toLowerCase()
+      const notebook_lowerCase = notebook.name.toLowerCase()
+      const matchingNotebooks = [tag_lowerCase, tag_lowerCase + '-notes', tag_lowerCase + '-tasks', tag_lowerCase + '~contacts']
+      if (matchingNotebooks.includes(notebook_lowerCase)) {
+        result.push(notebook)
+      }
+    }
+  }
+  //console.log(`tags:initalNotebooks() - result: `, result)
+  return result;
+}
+
 
 export function getSelectedTags(tags: TagType[]): TagType[] {
   return tags.filter((tag: TagType) => tag.selected)
@@ -28,18 +48,8 @@ export function hasTags(note: NoteType, tags: TagType[]): boolean {
   return result
 }
 
-export function filterNotes(notes: NoteType[], tags: TagType[]): NoteType[] {
-  let result: NoteType[] = []
-  const selectedTags: TagType[] = getSelectedTags(tags);
-  if (selectedTags.length == 0) {
-    result = notes
-  }
-  else {
-    result = notes.filter((note: NoteType) => hasTags(note, tags))
-  }
-  return result
-}
 
 
-export const TagsCustomer = (tags: TagType[]): TagType[] => { return findChildTags(tags, 'customer') }
-export const TagsMain = (tags: TagType[]): TagType[] => { return findChildTags(tags, 'main') }
+export const customerTags = (tags: TagType[]): TagType[] => { return findChildTags(tags, 'customer') }
+export const mainTags = (tags: TagType[]): TagType[] => { return findChildTags(tags, 'main') }
+export const otherTags = (tags: TagType[]): TagType[] => { return tags.filter(tag => tag.parentGuid == null) }

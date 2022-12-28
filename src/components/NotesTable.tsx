@@ -8,7 +8,7 @@ import TableRow from '@mui/material/TableRow';
 import TableSortLabel from '@mui/material/TableSortLabel';
 import Paper from '@mui/material/Paper';
 
-import NoteType from '../types/NoteTyoe'
+import NotebookType from '../types/NotebookType'
 import TagType from '../types/TagType';
 import { filterNotes } from '../helper/tags'
 
@@ -39,7 +39,7 @@ function getComparator<Key extends keyof any>(order: Order, orderBy: Key):
     : (a, b) => -descendingComparator(a, b, orderBy);
 }
 
-const tableContainerSx: SxProps = {
+const tableContainerSx = {
   //width: 'max-content',
   maxHeight: '90vh',
   maxWidth: '90vw',
@@ -49,17 +49,15 @@ const tableContainerSx: SxProps = {
   marginTop: 2
 }
 
-const rowSx: SxProps = {
+const rowSx = {
   padding: '1px',
   align: 'center'
 };
 
 
 interface NotesTableProps {
-  customerTags: TagType[];
-  mainTags: TagType[];
-  otherTags: TagType[];
-  notes: NoteType[];
+  tags: TagType[];
+  notebooks: NotebookType[];
 }
 
 
@@ -70,7 +68,7 @@ export default function NotesTable(props: NotesTableProps) {
 
 
   React.useEffect(() => {
-    const notes_state: NoteType[] = filterNotes(props.notes, props.customerTags)
+    const notes_state: NoteType[] = filterNotes(props.notebooks, props.tags)
     setNotes(notes_state)
   }, []);
 

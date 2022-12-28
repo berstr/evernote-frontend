@@ -1,6 +1,7 @@
 import React, { MouseEvent } from 'react';
 import TagType from '../../types/TagType'
 import TagList from '../TagList'
+import { mainTags, otherTags } from '../../helper/tags'
 import { AppContext } from '../../context';
 
 interface SidebarMainProps {
@@ -9,9 +10,14 @@ interface SidebarMainProps {
 
 export default function SidebarMain({ }: SidebarMainProps): JSX.Element {
 
-  const { mainTags } = React.useContext(AppContext);
+  const { tags } = React.useContext(AppContext);
 
-  return (<TagList tags={mainTags} sort={false} display={''} category={'main'} />)
+  return (
+    <div>
+      <TagList tags={mainTags(tags)} sort={false} display={''} />
+      <TagList tags={otherTags(tags)} sort={false} display={''} />
+    </div>
+  )
 }
 
 //                                 // <input type="checkbox" checked={account.selected} onChange={() => handleSelect(account)} />

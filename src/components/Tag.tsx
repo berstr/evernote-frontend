@@ -1,14 +1,17 @@
 import React, { MouseEvent } from 'react';
+import Button from '@mui/material/Button'
 import TagType from '../types/TagType'
 import { AppContext } from '../context';
 
 interface TagProps {
   tag: TagType;
-  category: string;
 }
 
+const buttonSx = {
+  fontSize: 10
+}
 
-export default function Tag({ tag, category }: TagProps): JSX.Element {
+export default function Tag({ tag }: TagProps): JSX.Element {
 
   let backgroundColor = {}
   let color = { color: 'black' }
@@ -32,7 +35,7 @@ export default function Tag({ tag, category }: TagProps): JSX.Element {
     if (tag.selected) {
       backgroundColor = { backgroundColor: '#b9b4b4' }
     }
-    console.log(`Tag [${category}]: `, tag)
+    //console.log(`Tag [${category}]: `, tag)
   }, [tag])
 
   const handleTagSelect = (tag: TagType) => {
@@ -41,7 +44,7 @@ export default function Tag({ tag, category }: TagProps): JSX.Element {
 
   return (
     <div className='tag' onMouseEnter={backgroundGrey} onMouseLeave={backgroundReset}>
-      <button onClick={() => { handleTagClick(tag, category) }}>{tag.name}</button>
+      <Button sx={{ px: 0, fontSize: 8 }} onClick={() => { handleTagClick(tag) }}>{tag.name}</Button>
     </div>
   )
 
